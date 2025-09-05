@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dzx - Overload - Beta Test</title>
+    <title>Dzx - Overload V4 - Beta Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <style>
@@ -31,43 +31,1829 @@
             flex-direction: column;
             position: relative;
             overflow-x: hidden;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         body.light-mode {
-            --main: #673ab7;
-            --second: #5e35b1;
-            --bg: #f0f2f5;
-            --text: #212121;
+            --bg: #f5f5f5;
+            --text: #121212;
             --card-bg: rgba(0, 0, 0, 0.05);
             --card-border: rgba(0, 0, 0, 0.1);
         }
         
         #particles-js {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
         }
         
-        .login-container {
-            width: 90%;
-            max-width: 400px;
-            margin: auto;
-            padding: 2.5em;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
             position: relative;
         }
         
-        .login-container h2 {
-            font-size: 2.2em;
-            margin-bottom: 0.5em;
+        .glass-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px rgba(156, 39, 176, 0.2);
+            z-index: 2;
+            max-width: 450px;
+            width: 100%;
+            margin: 20px auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(26, 26, 26, 0.8);
+            border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.light-mode .header {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
             color: var(--main);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: rgba(14, 14, 14, 0.7);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.light-mode .main-content {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .beta-notice {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(156, 39, 176, 0.1);
+            border-radius: 10px;
+            border: 1px solid var(--main);
+        }
+        
+        .beta-notice h2 {
+            color: #ff5722;
+            margin-bottom: 5px;
+        }
+        
+        .server-image {
+            width: 100%;
+            height: 200px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/ce77ff5f-34c6-49a2-bfa5-b89e66521ef4_Screenshot_20250902_144615.jpg?auth_key=1788336193-2f1caba06eed4d23993ed56c3b19c6a5-0-b5507f0553e9bbb502cd886eaaf95718');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 15px var(--main);
+        }
+        
+        body.light-mode .feature:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--main);
+        }
+        
+        .feature span {
+            font-size: 0.8rem;
+        }
+        
+        .telegram-btn {
+            background-color: var(--main);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .telegram-btn:hover {
+            background-color: var(--second);
+        }
+        
+        .server-stats {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .server-stats h3 {
+            margin-bottom: 15px;
+            color: var(--main);
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: rgba(26, 26, 26, 0.8);
+            padding: 15px 0;
+            border-top: 1px solid #333;
+            backdrop-filter: blur(10px);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.light-mode .bottom-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-top: 1px solid #ddd;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            color: var(--main);
+        }
+        
+        .nav-item.active {
+            color: var(--main);
+        }
+        
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item span {
+            font-size: 0.8rem;
+        }
+        
+        /* Halaman Bug */
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .user-profile {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .user-profile img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--main);
+            margin-bottom: 15px;
+        }
+        
+        .user-role {
+            color: var(--main);
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--main);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--main);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-mode .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--main), var(--second));
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 0 15px var(--main);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(156, 39, 176, 0.7);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .small-logout {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--main);
+            color: var(--main);
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: fit-content;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .small-logout:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        body.light-mode .small-logout {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        body.light-mode .small-logout:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Halaman Terminal */
+        .terminal {
+            background-color: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 15px;
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid var(--main);
+        }
+        
+        .terminal-line {
+            margin-bottom: 5px;
+        }
+        
+        .command-input {
+            display: flex;
+        }
+        
+        .command-input input {
+            flex: 1;
+            padding: 10px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 5px 0 0 5px;
+            color: var(--text);
+            font-family: monospace;
+        }
+        
+        .command-input button {
+            background-color: var(--main);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        /* Halaman Pesan */
+        .message {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .message-sender {
+            color: var(--main);
+            font-weight: bold;
+        }
+        
+        .message-time {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
+        body.light-mode .message-time {
+            color: #666;
+        }
+        
+        .contact-info {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 15px;
+            color: var(--main);
+        }
+        
+        .contact-item {
+            margin-bottom: 10px;
+        }
+        
+        /* Login Page */
+        .login-title {
+            font-size: 1.8rem;
+            color: var(--main);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px var(--main);
+        }
+        
+        .login-result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .login-error {
+            background-color: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+            color: #f44336;
+        }
+        
+        .login-success {
+            background-color: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+        }
+        
+        /* Bug Options */
+        .bug-select {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            color: var(--text);
+            font-size: 1rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%239c27b0'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.7em top 50%;
+            background-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .bug-select option, .bug-select optgroup {
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--main);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        /* Popup */
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .popup-content {
+            background: #1a1a1a;
+            color: #00ff88;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 0 20px var(--main);
+            animation: fadeIn 0.3s ease-in-out;
+            position: relative;
+            border: 1px solid var(--main);
+        }
+        
+        body.light-mode .popup-content {
+            background: #f0f0f0;
+            color: #121212;
+        }
+        
+        .popup-content .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #ff4d4d;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Neon effect */
+        .neon {
+            color: var(--main);
+            text-shadow: 0 0 5px var(--main), 0 0 10px var(--main), 0 0 20px var(--main);
+            animation: flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.4;
+            }
+        }
+        
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* DDoS Page */
+        .ddos-target {
+            margin-bottom: 20px;
+        }
+        
+        .ddos-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ddos-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ddos-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        body.light-mode .ddos-card:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .ddos-card i {
+            font-size: 2rem;
+            color: var(--main);
+            margin-bottom: 10px;
+        }
+        
+        .ddos-card h3 {
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+        
+        .ddos-card p {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        body.light-mode .ddos-card p {
+            color: #666;
+        }
+        
+        .ddos-settings {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ddos-settings h3 {
+            margin-bottom: 15px;
+            color: var(--main);
+        }
+        
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .setting-row label {
+            color: var(--text);
+        }
+        
+        .setting-row input {
+            width: 80px;
+            padding: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 5px;
+            color: var(--text);
+            text-align: center;
+        }
+        
+        .ddos-status {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ddos-status h3 {
+            margin-bottom: 15px;
+            color: var(--main);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .status-value {
+            color: #0f0;
+        }
+        
+        /* Account Page */
+        .account-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .account-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--main);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--main);
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .account-info h2 {
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+        
+        .account-info p {
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+        
+        body.light-mode .account-info p {
+            color: #666;
+        }
+        
+        .account-role {
+            display: inline-block;
+            background-color: var(--main);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .account-expiry {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        
+        .account-menu {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        body.light-mode .menu-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .menu-item i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            color: var(--main);
+        }
+        
+        .menu-item span {
+            color: var(--text);
+        }
+        
+        .account-form {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .account-form.active {
+            display: block;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--main);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div id="popup" style="display:none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    
+    <div class="container">
+        <div id="login-page" class="page active">
+            <div class="glass-box">
+                <h1 class="login-title">Dzx - Overload V4</h1>
+                <input type="text" id="username" class="form-control" placeholder="Username" />
+                <input type="password" id="password" class="form-control" placeholder="Password" />
+                <button class="btn-primary" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div id="login-result" class="login-result"></div>
+                <div style="margin-top: 20px; font-size: 0.8rem; color: #aaa; text-align: center;">
+                    <p>Dzx - Overload:</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="app-container" style="display:none;">
+            <div class="header">
+                <div class="time" id="current-time">00:00</div>
+                <h1>Dzx - Overload V4</h1>
+                <div class="user-info">
+                    <span id="header-username">Dayzx Official.</span>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div id="home-page" class="page active">
+                    <div class="beta-notice">
+                        <h2>🔥 Beta Test</h2>
+                        <p>This Apps Server Still On Beta Test.</p>
+                    </div>
+                    
+                    <div class="server-image"></div>
+                    
+                    <div class="features">
+                        <div class="feature" onclick="showPage('bug-page')">
+                            <i class="fas fa-bug"></i>
+                            <span>Bug</span>
+                        </div>
+                        <div class="feature" onclick="showPage('ddos-page')">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>DDoS</span>
+                        </div>
+                        <div class="feature" onclick="showPage('terminal-page')">
+                            <i class="fas fa-bolt"></i>
+                            <span>Terminal</span>
+                        </div>
+                        <div class="feature" onclick="showPage('account-page')">
+                            <i class="fas fa-user"></i>
+                            <span>Account</span>
+                        </div>
+                    </div>
+                    
+                    <button class="telegram-btn" onclick="openTelegram()">
+                        <i class="fab fa-telegram-plane"></i> Join Telegram Channel
+                    </button>
+                    
+                    <div class="server-stats">
+                        <h3>Server Stats</h3>
+                        <div class="stats-row">
+                            <span>Online Users: 7</span>
+                            <span>Active Senders: 0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="bug-page" class="page">
+                    <div class="user-profile">
+                        <img src="https://z-cdn-media.chatglm.cn/files/639768bc-254e-45af-bc72-8209af79a797_Screenshot_20250902_145314.jpg?auth_key=1788336193-6afc55c9403a47a1be88053480315051-0-2310b9c9c4eb30d39010034212bd7ff0" alt="User Avatar">
+                        <div class="user-role">Role: RESELLER</div>
+                        <div>Exp: 2025 - 09 - 29</div>
+                    </div>
+                    
+                    <h1 class="neon"><i class="fab fa-whatsapp"></i> Dzx - Overload </h1>
+                    
+                    <div class="form-group">
+                        <label for="target-number">Target Number</label>
+                        <input type="text" id="target-number" class="form-control" placeholder="628xxxx" value="@Kyleenih">
+                    </div>
+                    
+                    <select id="bug-select" class="bug-select">
+                        <optgroup label="Delay Bug">
+                            <option value="delayinvis">Delay Invisible</option>
+                            <option value="maklo">Maklo Delay V2</option>
+                            <option value="delayvisible">Delay Visible</option>
+                            <option value="delayblank">Delay Blank</option>
+                            <option value="bangkedelay">Bangke Delay</option>
+                        </optgroup>
+                        <optgroup label="iOS Attack">
+                            <option value="iosinvis">iOS Invisible</option>
+                            <option value="ios">iOS Bug</option>
+                        </optgroup>
+                        <optgroup label="Hard Attack">
+                            <option value="forclosespam">For Close Spam</option>
+                            <option value="group">Group Trash</option>
+                            <option value="kontolwa">Kontol WA</option>
+                            <option value="mmkwa">mmk WhatsApp</option>
+                        </optgroup>
+                    </select>
+
+                    <a href="https://wa.me/09882355930" target="_blank" class="btn-primary" style="margin-top: 20px;">
+                        <i class="fab fa-whatsapp"></i> Hubungi Developer via WhatsApp
+                    </a>
+                    
+                    <button id="send-bug-btn" class="btn-primary" onclick="sendBug()">
+                        <i class="fas fa-bug"></i> Kirim Bug
+                    </button>
+                    
+                    <button class="small-logout" onclick="logout()">Logout</button>
+                    
+                    <div id="bug-result" style="margin-top:10px;"></div>
+                </div>
+                
+                <div id="ddos-page" class="page">
+                    <h2 class="neon" style="margin-bottom: 20px; text-align: center;">
+                        <i class="fas fa-shield-alt"></i> DDoS Panel
+                    </h2>
+                    
+                    <div class="ddos-target">
+                        <div class="form-group">
+                            <label for="ddos-target-url">Target URL/IP</label>
+                            <input type="text" id="ddos-target-url" class="form-control" placeholder="example.com or 192.168.1.1">
+                        </div>
+                    </div>
+                    
+                    <div class="ddos-options">
+                        <div class="ddos-card" onclick="selectDDoSMethod('syn')">
+                            <i class="fas fa-network-wired"></i>
+                            <h3>SYN Flood</h3>
+                            <p>High volume attack</p>
+                        </div>
+                        <div class="ddos-card" onclick="selectDDoSMethod('udp')">
+                            <i class="fas fa-broadcast-tower"></i>
+                            <h3>UDP Flood</h3>
+                            <p>Connectionless attack</p>
+                        </div>
+                        <div class="ddos-card" onclick="selectDDoSMethod('http')">
+                            <i class="fas fa-globe"></i>
+                            <h3>HTTP Flood</h3>
+                            <p>Layer 7 attack</p>
+                        </div>
+                        <div class="ddos-card" onclick="selectDDoSMethod('slowloris')">
+                            <i class="fas fa-hourglass-half"></i>
+                            <h3>Slowloris</h3>
+                            <p>Slow attack</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ddos-settings">
+                        <h3>Attack Settings</h3>
+                        <div class="setting-row">
+                            <label>Duration (seconds)</label>
+                            <input type="number" id="ddos-duration" value="60" min="10" max="300">
+                        </div>
+                        <div class="setting-row">
+                            <label>Threads</label>
+                            <input type="number" id="ddos-threads" value="100" min="1" max="1000">
+                        </div>
+                        <div class="setting-row">
+                            <label>Requests per second</label>
+                            <input type="number" id="ddos-rps" value="50" min="1" max="500">
+                        </div>
+                    </div>
+                    
+                    <button id="start-ddos-btn" class="btn-primary" onclick="startDDoS()">
+                        <i class="fas fa-play"></i> Start Attack
+                    </button>
+                    
+                    <button class="small-logout" onclick="logout()">Logout</button>
+                    
+                    <div id="ddos-result" style="margin-top:10px;"></div>
+                </div>
+                
+                <div id="terminal-page" class="page">
+                    <h2 style="margin-bottom: 15px; color: var(--main);">Termux Terminal</h2>
+                    
+                    <div class="terminal" id="terminal-output">
+                        <div class="terminal-line">Welcome to Termux Terminal</div>
+                        <div class="terminal-line">Type 'help' for available commands</div>
+                    </div>
+                    
+                    <div class="command-input">
+                        <input type="text" id="command-input" placeholder="Enter command...">
+                        <button onclick="executeCommand()">Execute</button>
+                    </div>
+                    
+                    <button class="small-logout" onclick="logout()">Logout</button>
+                </div>
+                
+                <div id="messages-page" class="page">
+                    <h2 style="margin-bottom: 20px; color: var(--main);">Messages from Developer</h2>
+                    
+                    <div class="message">
+                        <div class="message-header">
+                            <div class="message-sender">Developer</div>
+                            <div class="message-time">2025-09-01 10:30</div>
+                        </div>
+                        <div class="message-content">
+                            Welcome to Dzx - Overload V4! This app is still in beta testing phase. Please report any bugs you find.
+                        </div>
+                    </div>
+                    
+                    <div class="message">
+                        <div class="message-header">
+                            <div class="message-sender">System Update</div>
+                            <div class="message-time">2025-09-02 14:15</div>
+                        </div>
+                        <div class="message-content">
+                            New features added: Terminal emulator and improved bug reporting system.
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>Contact Developer</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i> Email: support@rdvsp.com
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-telegram"></i> Telegram: @rdvsp_support
+                        </div>
+                        <button class="btn-primary" style="margin-top: 15px;" onclick="contactDeveloper()">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                    
+                    <button class="small-logout" onclick="logout()">Logout</button>
+                </div>
+                
+                <div id="account-page" class="page">
+                    <div class="account-card">
+                        <div class="account-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="account-info">
+                            <h2 id="account-username">Dayzx Official</h2>
+                            <div class="account-role" id="account-role">RESELLER</div>
+                            <p>Member since: 2024-01-15</p>
+                            <p class="account-expiry">Expires: <span id="account-expiry">2025-09-29</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="theme-toggle">
+                        <span>Dark Mode</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="theme-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="account-menu">
+                        <div class="menu-item" onclick="toggleAccountForm('change-password')">
+                            <i class="fas fa-key"></i>
+                            <span>Change Password</span>
+                        </div>
+                        <div class="menu-item" onclick="toggleAccountForm('change-username')">
+                            <i class="fas fa-user-edit"></i>
+                            <span>Change Username</span>
+                        </div>
+                        <div class="menu-item" onclick="toggleAccountForm('extend-expiry')">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>Extend Expiry Date</span>
+                        </div>
+                        <div class="menu-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </div>
+                    </div>
+                    
+                    <div id="change-password-form" class="account-form">
+                        <h3 style="margin-bottom: 15px; color: var(--main);">Change Password</h3>
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" class="form-control" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" class="form-control" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm new password">
+                        </div>
+                        <button class="btn-primary" onclick="changePassword()">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button class="small-logout" onclick="toggleAccountForm('')">Cancel</button>
+                    </div>
+                    
+                    <div id="change-username-form" class="account-form">
+                        <h3 style="margin-bottom: 15px; color: var(--main);">Change Username</h3>
+                        <div class="form-group">
+                            <label for="current-username">Current Username</label>
+                            <input type="text" id="current-username" class="form-control" placeholder="Current username" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-username">New Username</label>
+                            <input type="text" id="new-username" class="form-control" placeholder="Enter new username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password-confirm">Password</label>
+                            <input type="password" id="password-confirm" class="form-control" placeholder="Enter your password">
+                        </div>
+                        <button class="btn-primary" onclick="changeUsername()">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button class="small-logout" onclick="toggleAccountForm('')">Cancel</button>
+                    </div>
+                    
+                    <div id="extend-expiry-form" class="account-form">
+                        <h3 style="margin-bottom: 15px; color: var(--main);">Extend Expiry Date</h3>
+                        <div class="form-group">
+                            <label for="current-expiry">Current Expiry Date</label>
+                            <input type="text" id="current-expiry" class="form-control" placeholder="Current expiry date" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-expiry">New Expiry Date</label>
+                            <input type="date" id="new-expiry" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-password">Admin Password</label>
+                            <input type="password" id="admin-password" class="form-control" placeholder="Enter admin password">
+                        </div>
+                        <button class="btn-primary" onclick="extendExpiry()">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button class="small-logout" onclick="toggleAccountForm('')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showPage('home-page')">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item" onclick="showPage('bug-page')">
+                    <i class="fas fa-bug"></i>
+                    <span>Bug</span>
+                </div>
+                <div class="nav-item" onclick="showPage('ddos-page')">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>DDoS</span>
+                </div>
+                <div class="nav-item" onclick="showPage('account-page')">
+                    <i class="fas fa-user"></i>
+                    <span>Account</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 }},
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.4 },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true, distance: 150,
+                    color: "#ffffff", opacity: 0.3, width: 1
+                },
+                move: { enable: true, speed: 2, direction: "none", random: false }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: false }
+                },
+                modes: { grab: { distance: 200, line_linked: { opacity: 1 } } }
+            },
+            retina_detect: true
+        });
+        
+        // Local user data (no API)
+        const users = [
+            { username: "admin", password: "admin123", role: "ADMIN", expiry: "2025-12-31" },
+            { username: "kyleetzyy", password: "password", role: "RESELLER", expiry: "2025-09-29" },
+            { username: "user", password: "user123", role: "USER", expiry: "2025-06-30" }
+        ];
+        
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().getMinutes().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // Session management
+        function saveSession(user) {
+            sessionStorage.setItem("currentUser", JSON.stringify(user));
+        }
+        
+        function getSession() {
+            return JSON.parse(sessionStorage.getItem("currentUser"));
+        }
+        
+        function logout() {
+            sessionStorage.removeItem("currentUser");
+            location.reload();
+        }
+        
+        // Check if user is logged in
+        window.onload = function() {
+            const user = getSession();
+            if (user) {
+                showApp(user);
+                // Ensure home page is active after login
+                showPage('home-page');
+            }
+            
+            // Initialize theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        document.body.classList.remove('light-mode');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.body.classList.add('light-mode');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Check saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeToggle.checked = false;
+                }
+            }
+        };
+        
+        // Handle login function
+        function handleLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const resultDiv = document.getElementById('login-result');
+            
+            // Reset previous result
+            resultDiv.className = 'login-result';
+            resultDiv.style.display = 'none';
+            
+            if (!username || !password) {
+                showLoginError("Username dan Password harus diisi!");
+                return;
+            }
+            
+            // Show loading state
+            const loginBtn = document.querySelector('.btn-primary');
+            const originalBtnHTML = loginBtn.innerHTML;
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="spinner"></span> Memproses...';
+            
+            try {
+                // Find user in our local database
+                const foundUser = users.find(u => u.username === username && u.password === password);
+                
+                if (foundUser) {
+                    // Show success message
+                    showLoginSuccess("Login berhasil! Mengalihkan...");
+                    
+                    // Save session and redirect after a short delay
+                    setTimeout(() => {
+                        saveSession(foundUser);
+                        showApp(foundUser);
+                        // Ensure home page is active after login
+                        showPage('home-page');
+                    }, 1500);
+                } else {
+                    showLoginError("Username atau Password salah!");
+                }
+            } catch (error) {
+                console.error("Login error:", error);
+                showLoginError("Terjadi kesalahan. Silakan coba lagi.");
+            } finally {
+                // Reset button state
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = originalBtnHTML;
+            }
+        }
+        
+        // Show login error
+        function showLoginError(message) {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.textContent = message;
+            resultDiv.className = 'login-result login-error';
+            resultDiv.style.display = 'block';
+        }
+        
+        // Show login success
+        function showLoginSuccess(message) {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.textContent = message;
+            resultDiv.className = 'login-result login-success';
+            resultDiv.style.display = 'block';
+        }
+        
+        // Show the app after login
+        function showApp(user) {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            document.getElementById('header-username').innerText = user.username;
+            
+            // Update user info in account page
+            document.getElementById('account-username').innerText = user.username;
+            document.getElementById('account-role').innerText = user.role;
+            document.getElementById('account-expiry').innerText = user.expiry || '2025-09-29';
+            
+            // Update user role in bug page
+            const userRoleElements = document.querySelectorAll('.user-role');
+            userRoleElements.forEach(element => {
+                element.textContent = `Role: ${user.role}`;
+            });
+        }
+        
+        // Show page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            if (pageId === 'home-page') navItems[0].classList.add('active');
+            else if (pageId === 'bug-page') navItems[1].classList.add('active');
+            else if (pageId === 'ddos-page') navItems[2].classList.add('active');
+            else if (pageId === 'account-page') navItems[3].classList.add('active');
+        }
+        
+        // Open Telegram
+        function openTelegram() {
+            showNotification('Membuka channel Telegram...');
+            setTimeout(() => {
+                window.open('https://t.me/DayzxTech', '_blank');
+            }, 1000);
+        }
+        
+        // Bug selection
+        async function sendBug() {
+            const input = document.getElementById('target-number').value.trim();
+            const selectedBug = document.getElementById('bug-select').value;
+            const resDiv = document.getElementById('bug-result');
+            const btn = document.getElementById('send-bug-btn');
+            
+            // Validate phone number format
+            if (!/^\d+(@s\.whatsapp\.net)?$/.test(input)) {
+                resDiv.innerText = "Masukkan nomor WA yang valid!";
+                resDiv.style.color = "crimson";
+                return;
+            }
+            
+            // Format chatId
+            const chatId = input.includes("@s.whatsapp.net") ? input : `${input}@s.whatsapp.net`;
+            
+            // Show loading state
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span> Mengirim...';
+            resDiv.innerText = "";
+            
+            try {
+                // Make API call to send bug - using the same endpoint as in the provided HTML
+                const res = await fetch(`http://178.128.99.122:2054/evolution?type=${selectedBug}&chatId=${encodeURIComponent(chatId)}`);
+                const json = await res.json();
+                
+                // Show success popup
+                showPopup(`Bug berhasil dikirim ke <b>${input}</b>`);
+            } catch (err) {
+                // Show error message
+                resDiv.innerText = "❌ Gagal mengirim bug: " + err;
+                resDiv.style.color = "crimson";
+            }
+            
+            // Reset button state
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+        
+        // DDoS method selection
+        let selectedDDoSMethod = "syn";
+        
+        function selectDDoSMethod(method) {
+            selectedDDoSMethod = method;
+            
+            // Update UI to show selected method
+            document.querySelectorAll(".ddos-card").forEach(card => {
+                card.style.border = "1px solid var(--card-border)";
+                card.style.boxShadow = "none";
+            });
+            
+            event.currentTarget.style.border = "2px solid var(--main)";
+            event.currentTarget.style.boxShadow = "0 0 12px var(--main)";
+        }
+        
+        // Start DDoS attack
+        async function startDDoS() {
+            const target = document.getElementById('ddos-target-url').value.trim();
+            const duration = document.getElementById('ddos-duration').value;
+            const threads = document.getElementById('ddos-threads').value;
+            const rps = document.getElementById('ddos-rps').value;
+            const resDiv = document.getElementById('ddos-result');
+            const btn = document.getElementById('start-ddos-btn');
+            
+            if (!target) {
+                resDiv.innerText = "❌ Masukkan target URL/IP!";
+                resDiv.style.color = "crimson";
+                return;
+            }
+            
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span> Starting Attack...';
+            resDiv.innerText = "";
+            
+            try {
+                // Simulate DDoS attack
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show attack status
+                let secondsRemaining = parseInt(duration);
+                const attackInterval = setInterval(() => {
+                    resDiv.innerHTML = `
+                        <div class="ddos-status">
+                            <h3>Attack Status</h3>
+                            <div class="status-item">
+                                <span>Target:</span>
+                                <span>${target}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Method:</span>
+                                <span>${selectedDDoSMethod.toUpperCase()}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Time Remaining:</span>
+                                <span class="status-value">${secondsRemaining}s</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Threads:</span>
+                                <span>${threads}</span>
+                            </div>
+                            <div class="status-item">
+                                <span>Requests/s:</span>
+                                <span>${rps}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    secondsRemaining--;
+                    
+                    if (secondsRemaining < 0) {
+                        clearInterval(attackInterval);
+                        resDiv.innerHTML = `<div style="color: #0f0; text-align: center; margin-top: 10px;">✅ Attack completed successfully!</div>`;
+                        btn.disabled = false;
+                        btn.innerHTML = originalHTML;
+                    }
+                }, 1000);
+                
+                showPopup(`DDoS attack started on <b>${target}</b> using ${selectedDDoSMethod.toUpperCase()} method`);
+            } catch (err) {
+                resDiv.innerText = "❌ Gagal memulai serangan: " + err.message;
+                resDiv.style.color = "crimson";
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+            }
+        }
+        
+        // Toggle account form
+        function toggleAccountForm(formId) {
+            // Hide all forms
+            document.querySelectorAll('.account-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            // Show selected form
+            if (formId) {
+                document.getElementById(`${formId}-form`).classList.add('active');
+                
+                // Pre-fill current values
+                const user = getSession();
+                if (formId === 'change-password') {
+                    // Nothing to pre-fill for password form
+                } else if (formId === 'change-username') {
+                    document.getElementById('current-username').value = user.username;
+                } else if (formId === 'extend-expiry') {
+                    document.getElementById('current-expiry').value = user.expiry || '2025-09-29';
+                }
+            }
+        }
+        
+        // Change password
+        function changePassword() {
+            const currentPassword = document.getElementById('current-password').value.trim();
+            const newPassword = document.getElementById('new-password').value.trim();
+            const confirmPassword = document.getElementById('confirm-password').value.trim();
+            const user = getSession();
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification("❌ All fields are required!");
+                return;
+            }
+            
+            if (currentPassword !== user.password) {
+                showNotification("❌ Current password is incorrect!");
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showNotification("❌ New passwords do not match!");
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showNotification("❌ Password must be at least 6 characters!");
+                return;
+            }
+            
+            try {
+                // Find and update user in local array
+                const userIndex = users.findIndex(u => u.username === user.username);
+                if (userIndex !== -1) {
+                    users[userIndex].password = newPassword;
+                    
+                    // Update session
+                    saveSession(users[userIndex]);
+                    
+                    showNotification("✅ Password changed successfully!");
+                    toggleAccountForm('');
+                    
+                    // Clear form
+                    document.getElementById('current-password').value = '';
+                    document.getElementById('new-password').value = '';
+                    document.getElementById('confirm-password').value = '';
+                }
+            } catch (error) {
+                console.error("Error changing password:", error);
+                showNotification("❌ An error occurred. Please try again.");
+            }
+        }
+        
+        // Change username
+        function changeUsername() {
+            const newUsername = document.getElementById('new-username').value.trim();
+            const password = document.getElementById('password-confirm').value.trim();
+            const user = getSession();
+            
+            if (!newUsername || !password) {
+                showNotification("❌ All fields are required!");
+                return;
+            }
+            
+            if (password !== user.password) {
+                showNotification("❌ Password is incorrect!");
+                return;
+            }
+            
+            if (newUsername.length < 3) {
+                showNotification("❌ Username must be at least 3 characters!");
+                return;
+            }
+            
+            try {
+                // Check if username already exists
+                if (users.some(u => u.username === newUsername && u.username !== user.username)) {
+                    showNotification("❌ Username already exists!");
+                    return;
+                }
+                
+                // Find and update user in local array
+                const userIndex = users.findIndex(u => u.username === user.username);
+                if (userIndex !== -1) {
+                    const oldUsername = users[userIndex].username;
+                    users[userIndex].username = newUsername;
+                    
+                    // Update session
+                    saveSession(users[userIndex]);
+                    
+                    // Update UI
+                    document.getElementById('header-username').innerText = newUsername;
+                    document.getElementById('account-username').innerText = newUsername;
+                    
+                    showNotification("✅ Username changed successfully!");
+                    toggleAccountForm('');
+                    
+                    // Clear form
+                    document.getElementById('new-username').value = '';
+                    document.getElementById('password-confirm').value = '';
+                }
+            } catch (error) {
+                console.error("Error changing username:", error);
+                showNotification("❌ An error occurred. Please try again.");
+            }
+        }
+        
+        // Extend expiry date
+        function extendExpiry() {
+            const newExpiry = document.getElementById('new-expiry').value;
+            const adminPassword = document.getElementById('admin-password').value.trim();
+            const user = getSession();
+            
+            if (!newExpiry || !adminPassword) {
+                showNotification("❌ All fields are required!");
+                return;
+            }
+            
+            // Check admin password (hardcoded for demo)
+            if (adminPassword !== "admin123") {
+                showNotification("❌ Admin password is incorrect!");
+                return;
+            }
+            
+            try {
+                // Find and update user in local array
+                const userIndex = users.findIndex(u => u.username === user.username);
+                if (userIndex !== -1) {
+                    const oldExpiry = users[userIndex].expiry;
+                    users[userIndex].expiry = newExpiry;
+                    
+                    // Update session
+                    saveSession(users[userIndex]);
+                    
+                    // Update UI
+                    document.getElementById('account-expiry').innerText = newExpiry;
+                    
+                    showNotification("✅ Expiry date extended successfully!");
+                    toggleAccountForm('');
+                    
+                    // Clear form
+                    document.getElementById('new-expiry').value = '';
+                    document.getElementById('admin-password').value = '';
+                }
+            } catch (error) {
+                console.error("Error extending expiry:", error);
+                showNotification("❌ An error occurred. Please try again.");
+            }
+        }
+        
+        // Execute command
+        function executeCommand() {
+            const commandInput = document.getElementById('command-input');
+            const command = commandInput.value.trim();
+            
+            if (!command) return;
+            
+            const terminalOutput = document.getElementById('terminal-output');
+            
+            // Add command to terminal
+            const commandLine = document.createElement('div');
+            commandLine.className = 'terminal-line';
+            commandLine.textContent = `$ ${command}`;
+            terminalOutput.appendChild(commandLine);
+            
+            // Process command
+            let output = '';
+            
+            if (command === 'help') {
+                output = 'Available commands:\n- help: Show this help message\n- clear: Clear terminal\n- version: Show app version\n- status: Show server status\n- users: Show online users';
+            } else if (command === 'clear') {
+                terminalOutput.innerHTML = '';
+                commandInput.value = '';
+                return;
+            } else if (command === 'version') {
+                output = 'RDVSP V4 Beta v1.0.0';
+            } else if (command === 'status') {
+                output = 'Server Status: Online\nUsers: 7\nActive Senders: 0';
+            } else if (command === 'users') {
+                output = 'Online Users:\n- kyleetzyy (RESELLER)\n- user1 (USER)\n- user2 (USER)\n- admin (ADMIN)\n- user3 (USER)\n- user4 (USER)\n- user5 (USER)';
+            } else {
+                output = `Command not found: ${command}\nType 'help' for available commands`;
+            }
+            
+            // Add output to terminal
+            const outputLine = document.createElement('div');
+            outputLine.className = 'terminal-line';
+            outputLine.textContent = output;
+            terminalOutput.appendChild(outputLine);
+            
+            // Scroll to bottom
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            
+            // Clear input
+            commandInput.value = '';
+        }
+        
+        // Contact developer
+        function contactDeveloper() {
+            showNotification('Opening contact form...');
+            // In a real app, this would open a contact form or email client
+            setTimeout(() => {
+                showNotification('Message sent to developer!');
+            }, 1500);
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Show popup
+        function showPopup(message) {
+            document.getElementById("popup-message").innerHTML = message;
+            document.getElementById("popup").style.display = "flex";
+        }
+        
+        // Close popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        
+        // Handle Enter key in terminal
+        document.getElementById('command-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCommand();
+            }
+        });
+        
+        // Handle Enter key in login form
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+    </script>
+</body>
+</html>            color: var(--main);
             text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
         }
         
